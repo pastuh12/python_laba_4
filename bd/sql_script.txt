@@ -1,0 +1,26 @@
+PRAGMA foreign_keys = OFF;
+    DROP TABLE IF EXISTS author;
+    DROP TABLE IF EXISTS genre;
+    DROP TABLE IF EXISTS works;
+    PRAGMA foreign_keys = ON;
+    CREATE TABLE author(
+    author_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author_name VARCHAR(150),
+    date_of_birth VARCHAR(25),
+    place_of_birth VARCHAR(100),
+    date_of_death VARCHAR(25)
+    );
+    CREATE TABLE genre(
+    genre_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    genre_name VARCHAR(55)
+    );
+    CREATE TABLE works(
+    works_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    works_title VARCHAR(100),
+    date_of_creation VARCHAR(25),
+    author_id INTEGER,
+    genre_id INTEGER);
+
+    INSERT INTO genre(genre_name) VALUES("Роман");
+    INSERT INTO genre(genre_name) VALUES("Поэма");
+    INSERT INTO genre(genre_name) VALUES("Баллада");

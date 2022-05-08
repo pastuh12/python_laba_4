@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./cgi/script.py"></script>
+  </head>
+  <body>
+    <form action="/cgi-bin/script.py">
+      <div>
+        <h4>Данные автора</h4>
+        <input type="text" placeholder="Имя автора" name="author-name" /><br />
+        <input placeholder="Дата рождения" name="date-of-birth" /><br />
+        <input placeholder="Место рождения" name="place-of-birth" /><br />
+        <input placeholder="Дата смерти" name="date-of-death" /><br />
+      </div>
+      <div>
+        <h4>Данные произведения</h4>
+        <input placeholder="Название произведения" name="works-title" /><br />
+        <input placeholder="Год создания" name="date-of-creation" /><br />
+        <div class="">
+          <input name="genre" type="radio" value="1" checked="false" /> Роман
+          <input name="genre" type="radio" value="2" checked="false" /> Поэма
+          <input name="genre" type="radio" value="3" checked checked="false" />
+          Баллада
+        </div>
+      </div>
+      <div>
+        <button>Отправить</button>
+      </div>
+    </form>
+    <form action="./cgi/all_data_script.py">
+      <div>
+        <button>Показать все данные</button>
+      </div>
+    </form>
+    <form action="./cgi/export_script.py">
+      <div>
+        <button>Экспорт из XML</button>
+      </div>
+    </form>
+    <form action="./cgi/import_script.py">
+      <div>
+        <button>Импорт в XML</button>
+      </div>
+    </form>
+    <form action="./cgi/clear.py">
+      <div>
+        <button>Очистить бд</button>
+      </div>
+    </form>
+  </body>
+</html>
