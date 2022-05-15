@@ -1,26 +1,25 @@
 PRAGMA foreign_keys = OFF;
-    DROP TABLE IF EXISTS author;
-    DROP TABLE IF EXISTS genre;
-    DROP TABLE IF EXISTS works;
+    DROP TABLE IF EXISTS operations;
+    DROP TABLE IF EXISTS brokers;
+    DROP TABLE IF EXISTS users;
     PRAGMA foreign_keys = ON;
-    CREATE TABLE author(
-    author_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    author_name VARCHAR(150),
-    date_of_birth VARCHAR(25),
-    place_of_birth VARCHAR(100),
-    date_of_death VARCHAR(25)
+    CREATE TABLE operations(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    date_of_open VARCHAR(25),
+    broker_id INTEGER,
+    date_of_close VARCHAR(25),
+    value INTEGER
     );
-    CREATE TABLE genre(
-    genre_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    genre_name VARCHAR(55)
+    CREATE TABLE brokers(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title VARCHAR(25),
+    site VARCHAR(100),
+    telephon VARCHAR(25)
     );
-    CREATE TABLE works(
-    works_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    works_title VARCHAR(100),
-    date_of_creation VARCHAR(25),
-    author_id INTEGER,
-    genre_id INTEGER);
+    CREATE TABLE users(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name VARCHAR(50),
+        cash_account INTEGER
+    );
 
-    INSERT INTO genre(genre_name) VALUES("Роман");
-    INSERT INTO genre(genre_name) VALUES("Поэма");
-    INSERT INTO genre(genre_name) VALUES("Баллада");
