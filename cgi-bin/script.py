@@ -9,17 +9,15 @@ form = cgi.FieldStorage()
 def safe_user():
     user_data = (form.getfirst("name"),
                    form.getfirst("cash-account"))
-
-    sql = 'INSERT INTO user(user_name, cash-account) VALUES(?, ?);'
+    title = "Данные пользователя сохранены"
+    content = ''
+    sql = 'INSERT INTO users(name, cash_account) VALUES(?, ?);'
     try:
         cur.execute(sql, user_data)
         con.commit()
-    except Exception as error:
-        print("\n\n\n\n" + error + "\n\n\n\n")
 
-    title = "Данные пользователя сохранены"
-    content = f'''
-        <h2 class="mt-5">Данные об новом пользователе успешно сохранены</h2>
+        content = f'''
+        <h2 class="mt-5">Данные о новом пользователе успешно сохранены</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -34,20 +32,20 @@ def safe_user():
                 </tr>
             </tbody>
     '''
+    except Exception as error:
+        content = error
     return create_page(title, content)
 
 def safe_broker():
     broker_data = (form.getfirst("title"), form.getfirst("site"), form.getfirst("telephon"))
 
-    sql = 'INSERT INTO broker(title, site, telephon) VALUES(?,?,?)'
+    sql = 'INSERT INTO brokers(title, site, telephon) VALUES(?,?,?)'
     try:
         cur.execute(sql, broker_data)
         con.commit()
-    except Exception as error:
-        print("\n\n\n\n" + error + "\n\n\n\n")
 
-    title = "Данные брокера сохранены"
-    content = f'''
+        title = "Данные брокера сохранены"
+        content = f'''
         <h2 class="mt-5">Данные о новом брокере успешно сохранены</h2>
         <table class="table">
             <thead>
@@ -65,6 +63,9 @@ def safe_broker():
                 </tr>
             </tbody>
     '''
+    except Exception as error:
+        content = error
+        
     return create_page(title, content)
 
 
@@ -77,11 +78,10 @@ def safe_operation():
     try:
         cur.execute(sql, operation_data)
         con.commit()
-    except Exception as error:
-        print("\n\n\n\n" + error + "\n\n\n\n")
 
-    title = "Данные произведения сохранены"
-    content = f'''
+
+        title = "Данные произведения сохранены"
+        content = f'''
         <h2 class="mt-5">Данные об новом авторе успешно сохранены</h2>
         <table class="table">
             <thead>
@@ -103,12 +103,14 @@ def safe_operation():
                 </tr>
             </tbody>
     '''
+    except Exception as error:
+        content = error
     return create_page(title, content)
     
 
 
 form_type = form.getfirst("type")
-con = sqlite3.connect('../bd/database.bd')
+con = sqlite3.connect('./bd/database.db')
 cur = con.cursor()
 
 if (form_type == "user"):

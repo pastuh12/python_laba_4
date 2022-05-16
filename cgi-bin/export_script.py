@@ -9,39 +9,39 @@ fileXml = 'import.xml'
 title = "Экспортирование"
 content = ''
 try:
-    con = sqlite3.connect('../bd/database.db')
+    con = sqlite3.connect('./bd/database.db')
     cur = con.cursor()
     tree = ET.parse(fileXml)
     root = tree.getroot()
 
-    sql = 'INSERT INTO author(author_name, date_of_birth, place_of_birth, date_of_death) VALUES(?, ?, ?, ?);'
+    sql = 'INSERT INTO users(name, cash_account) VALUES(?,?);'
     values = []
-    authors = root.findall('author')
-    for author in authors:
+    users = root.findall('user')
+    for user in users:
         values.clear()
-        for i in author:
+        for i in user:
             values.append(i.text)
         cur.execute(
             sql,
             values
         )
 
-    sql = 'INSERT INTO store(title, address) VALUES(?, ?);'
+    sql = 'INSERT INTO brokers(title, site, telephon) VALUES(?, ?, ?);'
     values = []
-    stores = root.findall('store')
-    for store in stores:
+    brokers = root.findall('broker')
+    for broker in brokers:
         values.clear()
-        for i in store:
+        for i in broker:
             values.append(i.text)
         cur.execute(
             sql,
             values
             )
 
-    sql = 'INSERT INTO works(works_title, date_of_creation, author_id, genre, store_id) VALUES(?,?,?,?,?)'
+    sql = 'INSERT INTO operations(user_id, date_of_open, date_of_close, broker_id, value) VALUES(?,?,?,?,?)'
     values = []
-    works = root.findall('works')
-    for work in works:
+    operation = root.findall('operation')
+    for work in operation:
         values.clear()
         for i in work:
             values.append(i.text)

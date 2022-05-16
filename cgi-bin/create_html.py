@@ -17,7 +17,13 @@ def create_page(title, content):
             <div class="container">
                 <h1>{title}</h1>
                 {content}
+                            <div>
+              <a href="">
+                <button class="mt-5 btn btn-info">Вернуться на главную</button>
+              </a>
             </div>
+            </div>
+
           </body>
         </html>
     '''

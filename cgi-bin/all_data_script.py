@@ -26,10 +26,10 @@ content = '''
 '''
 title = "Все данные"
 try:
-    con = sqlite3.connect('../bd/database.db')
+    con = sqlite3.connect('./bd/database.db')
     cur = con.cursor()
     cur.execute(
-        'SELECT o.id, o.date_of_open, o.date_of_close, o.value, b.title, b.site, b.telephon, u.name, u.cash_account FROM operations o JOIN brokers b ON (o.broker_id = b.id) JOIN users u ON (o.user_id = u.id) WHERE b.tittle IS NOT NULL;'
+        'SELECT o.id, o.date_of_open, o.date_of_close, o.value, b.title, b.site, b.telephon, u.name, u.cash_account FROM operations o JOIN brokers b ON (o.broker_id = b.id) JOIN users u ON (o.user_id = u.id) WHERE b.title IS NOT NULL;'
     )
     rows = cur.fetchall()
     print(rows, file=sys.stdout)

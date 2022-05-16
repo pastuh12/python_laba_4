@@ -17,41 +17,40 @@ try:
     tree = ET.parse(fileXml)
     new_root = tree.getroot()
 
-    con = sqlite3.connect('../bd/database.db')
+    con = sqlite3.connect('./bd/database.db')
     cur = con.cursor()
     column_name = [
-        'author_name', 'date_of_birth', 'place_of_birth', 'date_of_death'
-    ]
-    sql = 'SELECT author_name, date_of_birth, place_of_birth, date_of_death FROM author WHERE author_name IS NOT NULL ;'
+        'name', 'cash_account']
+    sql = 'SELECT name, cash_account FROM users WHERE name IS NOT NULL ;'
     cur.execute(sql)
     rows = cur.fetchall()
     for row in rows:
-        new_element = ET.Element('author')
+        new_element = ET.Element('user')
         for i in range(len(row)):
             new_subelement = ET.SubElement(new_element, column_name[i])
             new_subelement.text = str(row[i])
         new_root.append(new_element)
     tree.write(fileXml, encoding='utf-8')
 
-    column_name = ['title', 'address']
-    sql = 'SELECT title, address FROM store  WHERE title IS NOT NULL;'
+    column_name = ['title', 'site', 'telephon']
+    sql = 'SELECT title, site, telephon FROM brokers  WHERE title IS NOT NULL;'
     cur.execute(sql)
     rows.clear()
     rows = cur.fetchall()
     for row in rows:
-        new_element = ET.Element('store')
+        new_element = ET.Element('broker')
         for i in range(len(row)):
             new_subelement = ET.SubElement(new_element, column_name[i])
             new_subelement.text = str(row[i])
         new_root.append(new_element)
 
-    column_name = ['works_title', 'date_of_creation', 'author_id', 'genre', 'store_id']
-    sql = 'SELECT works_title, date_of_creation, author_id, genre, store_id FROM works WHERE works_title IS NOT NULL;'
+    column_name = ['user_id', 'date_of_open', 'date_of_close', 'broker_id', 'value']
+    sql = 'SELECT user_id, date_of_open, date_of_close, broker_id, value FROM operations WHERE user_id IS NOT NULL;'
     cur.execute(sql)
     rows.clear()
     rows = cur.fetchall()
     for row in rows:
-        new_element = ET.Element('works')
+        new_element = ET.Element('operation')
         for i in range(len(row)):
             new_subelement = ET.SubElement(new_element, column_name[i])
             new_subelement.text = str(row[i])
